@@ -1,0 +1,182 @@
+# Configure at first
+- Apple ID in AppStore
+- Apple ID And Libriary in Itunes
+- Gmail account in Mail app
+- Gmail and Phone number in Messages app
+
+# Install from AppStore
+- XCode
+- Valentina Studio
+- JSON XML Parser
+- Do HTTP (Or CocoaRestClient from web)
+- TimeStamp Converter
+- Don't Sleep!
+- The Unarchiver
+
+# Install from Internet
+- FileZilla (Be cerafull not install ZipCloud And MacKeeper)
+- Sublime text 3
+- Sequel Pro
+- Skype
+- HipChat
+- Google Chrome
+- Google Drive
+- Dropbox (if need)
+- Viber
+- PuntoSwitcher
+- TeamViewer
+- SourceTree
+- SizzlingKeys
+- CheatSheet
+
+# Install from terminal
+
+# xCode select
+# Accept license from terminal by command
+$ sudo xcodebuild -license (Enter > agree > enter)
+
+$ xcode-select --install
+
+# Run AppStore and update xcode modules if need and OS X
+# Run xcode and install internal modules updates
+
+# Apache installed by default
+$ nano /etc/apache2/httpd.conf # uncoment ServerName and set it to "localhost"
+
+# Homebrew
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install php 5.6
+
+$ brew tap homebrew/dupes
+$ brew tap homebrew/versions
+$ brew tap homebrew/homebrew-php
+$ brew install php56 --without-snmp --with-cgi --with-postgresql --with-debug --with-homebrew-openssl --with-imap --with-intl --with-mysql
+ 
+
+$ sudo nano /etc/apache2/httpd.conf
+
+# To enable PHP in Apache add the following to httpd.conf and restart Apache:
+#    LoadModule php5_module    /usr/local/opt/php56/libexec/apache2/libphp5.so
+
+# To Enable rewrite Apache module in .htaccess uncoment
+#    LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+
+# Change DocumentRoot Path to Your
+#    DocumentRoot "/Users/noonehos/projects"
+#    <Directory "/Users/noonehos/projects">
+#         AllowOverride None -> set to "All"
+
+$ sudo httpd -k restart
+
+# For Auto-start Apache on boot
+$ sudo launchctl load -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+
+# For disable it just run
+$ sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist
+
+# The php.ini file can be found in:
+#    /usr/local/etc/php/5.6/php.ini
+
+# If PEAR complains about permissions, 'fix' the default PEAR permissions and config:
+$ chmod -R ug+w /usr/local/Cellar/php56/5.6.4/lib/php
+$ pear config-set php_ini /usr/local/etc/php/5.6/php.ini
+
+$ sudo httpd -k restart
+
+$ ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+
+$ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Show the ~/Library folder
+
+$ chflags nohidden ~/Library
+$ chflags nohidden /Library
+
+
+# Set hostname
+$ sudo scutil --set HostName YourHostName
+
+# COMPOSER
+
+# Composer
+# Packagist – Browse packages
+# As a PHP developer for sure you are going to use Composer! We are not going to install it directly in /usr/local/bin as this # directory is write-protected for the regular system user and we don’t ever want to run Composer with sudo. 
+# Install it # # # somewhere else and simply symlink it into /usr/local/bin:
+
+$ mkdir -p /Applications/Tools && cd /Applications/Tools/
+$ curl -sS https://getcomposer.org/installer | php
+$ sudo ln -sf /Applications/Tools/composer.phar /usr/local/bin/composer
+ 
+# Upgrading Composer is terribly easy and does not require superuser rights:
+$ composer self-update
+ 
+# Install some PHP extensions: 
+$ brew install php56-mcrypt
+$ brew install php56-xdebug
+$ brew install php56-imagick
+$ brew install phpmd
+$ brew install gcc
+$ brew install homebrew/php/phplint
+$ sudo pear install PHP_CodeSniffer
+
+# PEAR
+$ cd /usr/local
+$ curl -O  http://pear.php.net/go-pear.phar
+$ sudo php -d detect_unicode=0 go-pear.phar
+$ export PATH="$(brew --prefix php56)/bin:$PATH"
+
+# Add your local hosts to /etc/hosts
+# sudo subl /etc/hosts
+#   127.0.0.1	test.loc
+#   ...
+
+# GIT
+
+$ brew install git
+$ echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"' >> ~/.bash_profile
+
+# Restart terminal
+
+$ which git
+
+# Must show like this:
+# /usr/local/bin/git
+$ git config --global push.default current
+$ git config --global pull.default current
+$ git config --global user.name "Name Surname"
+$ git config --global user.email yourEmail@gmail.com
+
+# Bitbucket connect
+
+$ mkdir -p ~/.ssh
+$ ssh-keygen
+# all set to default just use "Enter"
+$ ssh-add ~/.ssh/id_rsa
+$ ssh-add -l
+# SHOW: 2048 3c:5b:33:45:0b:aa:ad:5..... /Users/noonehos/.ssh/id_rsa (RSA)
+
+#Install the public key on your Bitbucket account
+# Mac OSX the following command copies the output to the clipboard
+$ pbcopy < ~/.ssh/id_rsa.pub
+
+# Set it to profile in bitbacket as new ssh key
+# More detail info https://confluence.atlassian.com/pages/viewpage.action?pageId=270827678
+
+# Install newer vim with lua
+$ brew install vim --with-lua
+
+# Postgres from Brew
+$ brew tap petere/postgresql
+$ brew install postgresql-9.4
+$ brew unlink postgresql
+$ brew link --overwrite --force postgresql-9.4
+
+# If postgres not work with php 
+$ brew reinstall php56 --with-pgsql
+$ sudo httpd -k restart
+
+# For changing PostgreSQL user Password
+$ psql -d postgres
+postgres=# ALTER USER yourUserName WITH PASSWORD 'yourNewPassword';
+postgres=# \q

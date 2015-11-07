@@ -1,0 +1,13 @@
+# Install Node
+$ brew install node
+$ npm install 
+
+$ npm install -g async
+$ npm install -g pg
+$ npm install -g db-migrate
+$ npm install -g grunt
+$ npm install -g gulp
+
+$ cd pathToProject/build/
+$ npm install
+$ subl database.json
